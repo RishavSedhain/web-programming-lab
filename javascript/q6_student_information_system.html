@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Information System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .box {
+            width: 700px;
+            padding: 20px;
+            border: 1px solid #999999;
+            border-radius: 8px;
+        }
+
+        label {
+            display: inline-block;
+            width: 120px;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #e6e6e6;
+        }
+    </style>
+    <script>
+        var studentList = [];
+
+        var studentManager = {
+            add: function(student) {
+                studentList.push(student);
+            },
+            clear: function(formObj) {
+                formObj.reset();
+                formObj.elements["studentName"].focus();
+            }
+        };
+
+        function getCheckedSubjects() {
+            var boxes = document.getElementsByName("subjects");
+            var selected = [];
+
+            for (var i = 0; i < boxes.length; i++) {
+                if (boxes[i].checked) {
+                    selected.push(boxes[i].value);
+                }
+            }
+
+            return selected;
+        }
+
+        function addStudentRecord(formObj) {
+            var student = {
+                name: formObj.elements["studentName"].value,
+                regNo: formObj.elements["regNo"].value,
+                department: formObj.elements["department"].value,
+                gender: formObj.querySelector('input[name="gender"]:checked').value,
+                subjects: getCheckedSubjects(),
+                remarks: formObj.elements["remarks"].value,
+                getSummary: function() {
+                    return this.name + " (" + this.regNo + ")";
+                }
+            };
+
+            studentManager.add(student);
+            displayStudents();
+            studentManager.clear(formObj);
+        }
+
+        function displayStudents() {
+            var html = "<tr>" +
+                "<th>S.No.</th><th>Student</th><th>Department</th>" +
+                "<th>Gender</th><th>Subjects</th><th>Remarks</th></tr>";
+
+            for (var i = 0; i < studentList.length; i++) {
+                html += "<tr><td>" + (i + 1) + "</td>" +
+                    "<td>" + studentList[i].getSummary() + "</td>" +
+                    "<td>" + studentList[i].department + "</td>" +
+                    "<td>" + studentList[i].gender + "</td>" +
+                    "<td>" + studentList[i].subjects.join(", ") + "</td>" +
+                    "<td>" + studentList[i].remarks + "</td></tr>";
+            }
+
+            document.getElementById("studentTable").innerHTML = html;
+        }
+    </script>
+</head>
+<body>
+    <div class="box">
+        <h3>Student Information System</h3>
+
+        <form>
+            <label>Name:</label>
+            <input type="text" name="studentName"><br>
+
+            <label>Register No.:</label>
+            <input type="text" name="regNo"><br>
+
+            <label>Department:</label>
+            <select name="department">
+                <option value="CSE">CSE</option>
+                <option value="IT">IT</option>
+                <option value="ECE">ECE</option>
+            </select><br><br>
+
+            <label>Gender:</label>
+            <input type="radio" name="gender" value="Male" checked> Male
+            <input type="radio" name="gender" value="Female"> Female<br><br>
+
+            <label>Subjects:</label>
+            <input type="checkbox" name="subjects" value="Web Programming"> Web Programming
+            <input type="checkbox" name="subjects" value="Java"> Java
+            <input type="checkbox" name="subjects" value="Python"> Python<br><br>
+
+            <label>Remarks:</label>
+            <textarea name="remarks" rows="3" cols="35"></textarea><br><br>
+
+            <input type="button" value="Add Student" onclick="addStudentRecord(this.form)">
+            <input type="reset" value="Clear">
+        </form>
+
+        <table id="studentTable"></table>
+    </div>
+</body>
+</html>

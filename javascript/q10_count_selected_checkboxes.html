@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Count Selected Checkboxes</title>
+    <script>
+        function countSelected() {
+            var subjects = document.getElementsByName("subject");
+            var selectedSubjects = [];
+            var count = 0;
+
+            for (var i = 0; i < subjects.length; i++) {
+                if (subjects[i].checked) {
+                    count++;
+                    selectedSubjects.push(subjects[i].value);
+                }
+            }
+
+            document.getElementById("result").innerHTML =
+                "Selected Count: " + count + "<br>" +
+                "Selected Subjects: " + selectedSubjects.join(", ");
+        }
+    </script>
+</head>
+<body>
+    <h3>Select Subjects</h3>
+
+    <input type="checkbox" name="subject" value="Web Programming"> Web Programming
+    <input type="checkbox" name="subject" value="Java"> Java
+    <input type="checkbox" name="subject" value="Python"> Python
+    <input type="checkbox" name="subject" value="DBMS"> DBMS
+    <br><br>
+
+    <button type="button" onclick="countSelected()">Count Selected</button>
+    <p id="result"></p>
+</body>
+</html>

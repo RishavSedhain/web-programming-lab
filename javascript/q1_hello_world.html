@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello World</title>
+    <script>
+        function showMessage() {
+            var message = document.getElementById("message");
+            message.outerHTML = "<h3 id='message'>Hello, world!</h3>";
+        }
+    </script>
+</head>
+<body>
+    <h3 id="message">Click the button to display the message.</h3>
+    <input type="button" value="Show Message" onclick="showMessage()">
+</body>
+</html>

@@ -1,0 +1,279 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration Portal</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: skyblue;
+        }
+
+        h1 {
+            text-align: center;
+            color: #002b5c;
+            margin: 30px 0 20px;
+        }
+
+        .nav {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .nav a {
+            display: inline-block;
+            background-color: #003366;
+            color: white;
+            text-decoration: none;
+            padding: 10px 16px;
+            margin: 6px;
+            border-radius: 8px;
+        }
+
+        form {
+            width: 82%;
+            max-width: 900px;
+            margin: 0 auto 40px;
+        }
+
+        .section {
+            background-color: #003366;
+            color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .section h2 {
+            margin-top: 0;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .field {
+            flex: 1 1 250px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        .submit-box {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        button {
+            background-color: white;
+            color: #003366;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .popup {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .popup:target {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .popup-content {
+            background-color: white;
+            color: #003366;
+            width: 320px;
+            text-align: center;
+            padding: 25px 30px;
+            border-radius: 12px;
+        }
+
+        .popup-content a {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 16px;
+            background-color: #003366;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Student Registration Portal</h1>
+
+    <div class="nav">
+        <a href="#personal">Personal Information</a>
+        <a href="#academic">Academic Details</a>
+        <a href="#address">Address Information</a>
+        <a href="#account">Account Credentials</a>
+    </div>
+
+    <form action="#success">
+        <div class="section" id="personal">
+            <h2>Personal Information</h2>
+
+            <div class="row">
+                <div class="field">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" name="fullname">
+                </div>
+
+                <div class="field">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" id="dob" name="dob">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="field">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender">
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email">
+                </div>
+
+                <div class="field">
+                    <label for="mobile">Mobile Number</label>
+                    <input type="text" id="mobile" name="mobile">
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="academic">
+            <h2>Academic Details</h2>
+
+            <div class="row">
+                <div class="field">
+                    <label for="regno">Register Number</label>
+                    <input type="text" id="regno" name="regno">
+                </div>
+
+                <div class="field">
+                    <label for="degree">Degree Program</label>
+                    <input type="text" id="degree" name="degree">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="field">
+                    <label for="department">Department</label>
+                    <input type="text" id="department" name="department">
+                </div>
+
+                <div class="field">
+                    <label for="year">Year of Study</label>
+                    <select id="year" name="year">
+                        <option>First Year</option>
+                        <option>Second Year</option>
+                        <option>Third Year</option>
+                        <option>Fourth Year</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="address">
+            <h2>Address Information</h2>
+
+            <div class="row">
+                <div class="field">
+                    <label for="door">Door Number</label>
+                    <input type="text" id="door" name="door">
+                </div>
+
+                <div class="field">
+                    <label for="street">Street Name</label>
+                    <input type="text" id="street" name="street">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="field">
+                    <label for="city">City</label>
+                    <input type="text" id="city" name="city">
+                </div>
+
+                <div class="field">
+                    <label for="state">State</label>
+                    <input type="text" id="state" name="state">
+                </div>
+
+                <div class="field">
+                    <label for="pincode">Pincode</label>
+                    <input type="text" id="pincode" name="pincode">
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="account">
+            <h2>Account Credentials</h2>
+
+            <div class="row">
+                <div class="field">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username">
+                </div>
+
+                <div class="field">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password">
+                </div>
+
+                <div class="field">
+                    <label for="confirm">Confirm Password</label>
+                    <input type="password" id="confirm" name="confirm">
+                </div>
+            </div>
+
+            <div class="submit-box">
+                <button type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+
+    <div id="success" class="popup">
+        <div class="popup-content">
+            <h2>Form Submitted Successfully</h2>
+            <a href="#">Close</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Print Counting 1 to N</title>
+    <script>
+        function printNumbers() {
+            var n = parseInt(document.getElementById("limit").value);
+            var i = 1;
+            var output = "";
+
+            while (i <= n) {
+                output += i + " ";
+                i++;
+            }
+
+            document.getElementById("result").innerHTML = output;
+        }
+    </script>
+</head>
+<body>
+    <h3>Print Numbers from 1 to N</h3>
+    <input type="text" id="limit" placeholder="Enter N">
+    <button type="button" onclick="printNumbers()">Print</button>
+    <p id="result"></p>
+</body>
+</html>
