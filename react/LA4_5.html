@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>LA4 Q5 - Todo List</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .container { max-width: 700px; margin: auto; text-align: center; }
+    input, button { margin: 8px; padding: 8px; }
+    ul { list-style-type: none; padding: 0; }
+    li {
+      margin: 10px auto;
+      padding: 10px;
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function App() {
+      const [task, setTask] = React.useState("");
+      const [tasks, setTasks] = React.useState([]);
+
+      const addTask = () => {
+        if (task.trim() !== "") {
+          setTasks([...tasks, task]);
+          setTask("");
+        }
+      };
+
+      return (
+        <div className="container">
+          <h1>React Lab - Rishav Sedhain (24BCE2974)</h1>
+          <h2>Todo List</h2>
+
+          <input
+            type="text"
+            placeholder="Enter a task"
+            value={task}
+            onChange={(e) => setTask(e.target.value)}
+          />
+          <button onClick={addTask}>Add Task</button>
+
+          <ul>
+            {tasks.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>LA4 Q1 - Personalized Welcome</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .container { max-width: 700px; margin: auto; text-align: center; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function Welcome(props) {
+      return (
+        <div className="container">
+          <h1>React Lab - Rishav Sedhain (24BCE2974)</h1>
+          <h2>Hello {props.name} from {props.city}</h2>
+          <p>This is a personalized welcome message using props and functional components.</p>
+        </div>
+      );
+    }
+
+    function App() {
+      return <Welcome name="Rishav Sedhain" city="Kathmandu" />;
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+</html>

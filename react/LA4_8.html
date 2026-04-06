@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>LA4 Q8 - Country Explorer</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .container { max-width: 900px; margin: auto; text-align: center; }
+    input, button { margin: 8px; padding: 8px; }
+    .country-card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px auto;
+      width: 320px;
+    }
+    img { margin-top: 10px; width: 120px; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function App() {
+      const [country, setCountry] = React.useState("");
+      const [countryData, setCountryData] = React.useState([]);
+
+      const searchCountry = () => {
+        fetch(`https://restcountries.com/v3.1/name/${country}`)
+          .then((response) => response.json())
+          .then((data) => setCountryData(data))
+          .catch((error) => console.log(error));
+      };
+
+      return (
+        <div className="container">
+          <h1>React Lab - Rishav Sedhain (24BCE2974)</h1>
+          <h2>Country Explorer</h2>
+
+          <input
+            type="text"
+            placeholder="Enter country name"
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+          />
+          <button onClick={searchCountry}>Search</button>
+
+          {countryData.map((item, index) => (
+            <div className="country-card" key={index}>
+              <h3>{item.name.common}</h3>
+              <p><strong>Capital:</strong> {item.capital ? item.capital[0] : "N/A"}</p>
+              <p><strong>Population:</strong> {item.population}</p>
+              <p><strong>Region:</strong> {item.region}</p>
+              <img src={item.flags.png} alt="Flag" />
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+</html>

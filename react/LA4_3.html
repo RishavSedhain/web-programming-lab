@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>LA4 Q3 - Image Gallery</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .container { max-width: 800px; margin: auto; text-align: center; }
+    .thumbnails img {
+      width: 120px;
+      height: 80px;
+      object-fit: cover;
+      margin: 10px;
+      cursor: pointer;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+    }
+    .main-image {
+      width: 400px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function App() {
+      const images = [
+        "https://picsum.photos/id/1015/400/250",
+        "https://picsum.photos/id/1016/400/250",
+        "https://picsum.photos/id/1018/400/250"
+      ];
+
+      const [selectedImage, setSelectedImage] = React.useState(images[0]);
+
+      return (
+        <div className="container">
+          <h1>React Lab - Rishav Sedhain (24BCE2974)</h1>
+          <h2>Interactive Image Gallery</h2>
+
+          <img src={selectedImage} alt="Selected" className="main-image" />
+
+          <div className="thumbnails">
+            {images.map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt={"Thumbnail " + (index + 1)}
+                onClick={() => setSelectedImage(img)}
+              />
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+</html>

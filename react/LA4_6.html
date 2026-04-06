@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>LA4 Q6 - Weather Dashboard</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .container { max-width: 700px; margin: auto; text-align: center; }
+    input, button { margin: 8px; padding: 8px; }
+    .weather-box {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function App() {
+      const [city, setCity] = React.useState("");
+      const [weather, setWeather] = React.useState(null);
+
+      const fetchWeather = () => {
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=78d36dd1ac6dd60b4fe72ab1a23366e2&units=metric`)
+          .then((response) => response.json())
+          .then((data) => setWeather(data))
+          .catch((error) => console.log(error));
+      };
+
+      return (
+        <div className="container">
+          <h1>React Lab - Rishav Sedhain (24BCE2974)</h1>
+          <h2>Weather Dashboard</h2>
+
+          <input
+            type="text"
+            placeholder="Enter city name"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
+          <button onClick={fetchWeather}>Get Weather</button>
+
+          {weather && weather.main && (
+            <div className="weather-box">
+              <h3>{weather.name}</h3>
+              <p>Temperature: {weather.main.temp} °C</p>
+              <p>Humidity: {weather.main.humidity}%</p>
+              <p>Condition: {weather.weather[0].description}</p>
+              <p>Wind Speed: {weather.wind.speed} m/s</p>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+</html>

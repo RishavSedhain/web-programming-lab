@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>LA4 Q7 - Book Explorer</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .container { max-width: 900px; margin: auto; text-align: center; }
+    input, button { margin: 8px; padding: 8px; }
+    .book-card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px auto;
+      width: 300px;
+    }
+    img { margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function App() {
+      const [query, setQuery] = React.useState("");
+      const [books, setBooks] = React.useState([]);
+
+      const searchBooks = () => {
+        fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`)
+          .then((response) => response.json())
+          .then((data) => setBooks(data.items || []))
+          .catch((error) => console.log(error));
+      };
+
+      return (
+        <div className="container">
+          <h1>React Lab - Rishav Sedhain (24BCE2974)</h1>
+          <h2>Book Explorer</h2>
+
+          <input
+            type="text"
+            placeholder="Enter book name"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <button onClick={searchBooks}>Search</button>
+
+          {books.map((book, index) => (
+            <div className="book-card" key={index}>
+              <h3>{book.volumeInfo.title}</h3>
+              <p>{book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "Author not available"}</p>
+              {book.volumeInfo.imageLinks && (
+                <img src={book.volumeInfo.imageLinks.thumbnail} alt="Book Cover" />
+              )}
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+</html>
